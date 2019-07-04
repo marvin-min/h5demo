@@ -39,6 +39,7 @@ module.exports = {
   },
   devtool: env === 'production' ? 'source-map' : 'eval',
   devServer: {
+    host: '0.0.0.0',
     hot: true,
     open: true,
     compress: true,
@@ -46,6 +47,9 @@ module.exports = {
     disableHostCheck: true,
     watchOptions: {
       poll: 1000,
+    },
+    after: function(app, server) {
+      console.log('--go--')
     },
   },
   optimization: {
