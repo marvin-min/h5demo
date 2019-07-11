@@ -1,87 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
-    <title>Jquery Demo</title>
-    <script>
-        $(function () {
-            for (var i = 0; i < $('input').length; i++) {
-                $('input')[i].id = 'input-' + i;
-            }
-            $("#submit").data({ myProperty: "hello" });
-            $("#submit").data('value', 'bbb');
-        })
-    </script>
-    <style type="text/css">
-        .arrow_box {
-            position: relative;
-            background: #88b7d5;
-            border: 1px solid #c2e1f5;
-        }
-
-        .arrow_box:after,
-        .arrow_box:before {
-            left: 100%;
-            top: 50%;
-            border: solid transparent;
-            content: " ";
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-        }
-
-   
-.arrow_box:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-left-color: #88b7d5;
-	border-width: 20px;
-	margin-top: -20px;
-}
-.arrow_box:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-left-color: #c2e1f5;
-	border-width: 21px;
-	margin-top: -21px;
-}
-
-
-.step {
-    border: 1px solid #d1d1d4;
-    width: 80px;
-    padding: 20px 6px 20px 10px;
-    display: inline-block;
-    margin: 10px 0 10px 10px;
-}
-.arrow_box_c {
-    width: 30px;
-    display: inline-block;
-    margin-right: 20px;
-    margin-left: 10px;
-    line-height: 20px;
-}
-    </style>
-</head>
-
-<body>
-    <div style="line-height: 100px;">
-    <span class="step">
-            <svg t="1561710241593" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1201" width="64" height="64"><path d="M824.888889 0H369.777778c-62.577778 0-113.777778 51.2-113.777778 113.777778v796.444444c0 62.577778 51.2 113.777778 113.777778 113.777778h455.111111c62.577778 0 113.777778-51.2 113.777778-113.777778V113.777778c0-62.577778-51.2-113.777778-113.777778-113.777778zM597.333333 986.074074c-32.237037 0-56.888889-24.651852-56.888889-56.888889s24.651852-56.888889 56.888889-56.888889 56.888889 24.651852 56.888889 56.888889-24.651852 56.888889-56.888889 56.888889z m265.481482-170.666667c0 11.377778-7.585185 18.962963-18.962963 18.962963H350.814815c-11.377778 0-18.962963-7.585185-18.962963-18.962963V94.814815c0-11.377778 7.585185-18.962963 18.962963-18.962963h493.037037c11.377778 0 18.962963 7.585185 18.962963 18.962963v720.592592z m-87.22963-481.659259c15.17037 15.17037 15.17037 37.925926 0 53.096296l-189.629629 189.62963c-7.585185 7.585185-17.066667 11.377778-26.548149 11.377778s-18.962963-3.792593-26.548148-11.377778l-113.777778-113.777778c-15.17037-15.17037-15.17037-37.925926 0-53.096296 15.17037-15.17037 37.925926-15.17037 53.096297 0l87.229629 87.22963 163.081482-163.081482c15.17037-15.17037 37.925926-15.17037 53.096296 0z" fill="#707070" p-id="1202"></path></svg>
-    </span>
-    <span class="arrow_box arrow_box_c">&nbsp;</span>
-    <span class="step">
-            <svg t="1561710241593" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1201" width="64" height="64"><path d="M824.888889 0H369.777778c-62.577778 0-113.777778 51.2-113.777778 113.777778v796.444444c0 62.577778 51.2 113.777778 113.777778 113.777778h455.111111c62.577778 0 113.777778-51.2 113.777778-113.777778V113.777778c0-62.577778-51.2-113.777778-113.777778-113.777778zM597.333333 986.074074c-32.237037 0-56.888889-24.651852-56.888889-56.888889s24.651852-56.888889 56.888889-56.888889 56.888889 24.651852 56.888889 56.888889-24.651852 56.888889-56.888889 56.888889z m265.481482-170.666667c0 11.377778-7.585185 18.962963-18.962963 18.962963H350.814815c-11.377778 0-18.962963-7.585185-18.962963-18.962963V94.814815c0-11.377778 7.585185-18.962963 18.962963-18.962963h493.037037c11.377778 0 18.962963 7.585185 18.962963 18.962963v720.592592z m-87.22963-481.659259c15.17037 15.17037 15.17037 37.925926 0 53.096296l-189.629629 189.62963c-7.585185 7.585185-17.066667 11.377778-26.548149 11.377778s-18.962963-3.792593-26.548148-11.377778l-113.777778-113.777778c-15.17037-15.17037-15.17037-37.925926 0-53.096296 15.17037-15.17037 37.925926-15.17037 53.096297 0l87.229629 87.22963 163.081482-163.081482c15.17037-15.17037 37.925926-15.17037 53.096296 0z" fill="#707070" p-id="1202"></path></svg>
-    </span>
-    <span class="arrow_box arrow_box_c">&nbsp;</span>
-    <span class="step">
-            <svg t="1561710241593" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1201" width="64" height="64"><path d="M824.888889 0H369.777778c-62.577778 0-113.777778 51.2-113.777778 113.777778v796.444444c0 62.577778 51.2 113.777778 113.777778 113.777778h455.111111c62.577778 0 113.777778-51.2 113.777778-113.777778V113.777778c0-62.577778-51.2-113.777778-113.777778-113.777778zM597.333333 986.074074c-32.237037 0-56.888889-24.651852-56.888889-56.888889s24.651852-56.888889 56.888889-56.888889 56.888889 24.651852 56.888889 56.888889-24.651852 56.888889-56.888889 56.888889z m265.481482-170.666667c0 11.377778-7.585185 18.962963-18.962963 18.962963H350.814815c-11.377778 0-18.962963-7.585185-18.962963-18.962963V94.814815c0-11.377778 7.585185-18.962963 18.962963-18.962963h493.037037c11.377778 0 18.962963 7.585185 18.962963 18.962963v720.592592z m-87.22963-481.659259c15.17037 15.17037 15.17037 37.925926 0 53.096296l-189.629629 189.62963c-7.585185 7.585185-17.066667 11.377778-26.548149 11.377778s-18.962963-3.792593-26.548148-11.377778l-113.777778-113.777778c-15.17037-15.17037-15.17037-37.925926 0-53.096296 15.17037-15.17037 37.925926-15.17037 53.096297 0l87.229629 87.22963 163.081482-163.081482c15.17037-15.17037 37.925926-15.17037 53.096296 0z" fill="#707070" p-id="1202"></path></svg>
-    </span>
-</div>
-</body>
-
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+        <section class="hero">
+            <div class="hero-body">
+              <div class="container">
+                <h1 class="title">
+                  Hero title
+                </h1>
+                <h2 class="subtitle">
+                  Hero subtitle
+                </h2>
+              </div>
+            </div>
+          </section>
+      <div class="container is-fluid">
+        <div class="notification">
+          This container is <strong>fluid</strong>: it will have a 32px gap on either side, on any
+          viewport size.
+        </div>
+      </div>
+      <div class="container is-widescreen">
+        <div class="notification">
+          This container is <strong>fullwidth</strong> <em>until</em> the <code>$widescreen</code> breakpoint.
+        </div>
+      </div>
+      <div class="container is-fullhd">
+        <div class="notification">
+          This container is <strong>fullwidth</strong> <em>until</em> the <code>$fullhd</code> breakpoint.
+        </div>
+      </div>
+    </div>
+  </section>
+  </body>
 </html>
