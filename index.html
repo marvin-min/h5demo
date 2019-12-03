@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VUE demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{now}}
+        <span>{{getTime()}}</span>
+        <h1>{{msg}}</h1>
+        <p>{{html}}</p>
+        <p>{{ reverseMessage}}</p>
+        <span v-html="html"></span>
+        <button v-bind:disabled="isButtonDisabled">Button</button>
+
+        <p v-if="seen">现在你看到我了</p>
+
+        <a v-bind:href="target.url">{{target.label}}</a>
+        <a :href="target.url">.{{target.label}}.</a>
+        <a @click="fuck">Fuck off</a>
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "HELlo",
+                html: "<h1>Vue is good.</h1>",
+                isButtonDisabled: true,
+
+                seen: true,
+                attributeName: 'href',
+                target: {
+                    label: "BAIDU.com",
+                    url: 'https://www.baidu.com'
+                }
+            }, methods: {
+                fuck: function () {
+                    this.isButtonDisabled = !this.isButtonDisabled;
+                    this.msg = 'Fukc off .......'
+                    this.reverseMessage
+                },
+                getTime: function () {
+                    console.log('-->getTime<--')
+                    return Date.now();
+                }
+            }, computed: {
+                reverseMessage: function () {
+                    console.log('-->reverseMessage<--')
+                    return this.msg.split('').reverse().join('')
+                },
+                now: function () {
+                    return Date.now()
+                },
+
+            }, watch: {
+                msg: function (val) {
+                    console.log('msg changed,current value is ' + val)
+                }
+            }
+        }
+        );
+    </script>
+</body>
+
+</html>
