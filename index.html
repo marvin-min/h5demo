@@ -24,6 +24,8 @@
         <a v-bind:href="target.url">{{target.label}}</a>
         <a :href="target.url">.{{target.label}}.</a>
         <a @click="fuck">Fuck off</a>
+        <div :class="{ active: isActive, 'text-danger': seen }">动态变化内容</div>
+        <div :style="hualala">哗啦啦~~~~</div>
     </div>
 
     <script type="text/javascript">
@@ -33,8 +35,12 @@
                 msg: "HELlo",
                 html: "<h1>Vue is good.</h1>",
                 isButtonDisabled: true,
-
+                isActive: true,
                 seen: true,
+                hualala: {
+                    color: '#FF0000',
+                    fontSize: '20px',
+                },
                 attributeName: 'href',
                 target: {
                     label: "BAIDU.com",
@@ -45,6 +51,7 @@
                     this.isButtonDisabled = !this.isButtonDisabled;
                     this.msg = 'Fukc off .......'
                     this.reverseMessage
+                    this.isActive = !this.isActive
                 },
                 getTime: function () {
                     console.log('-->getTime<--')
