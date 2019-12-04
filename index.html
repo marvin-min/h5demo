@@ -20,12 +20,23 @@
         <button v-bind:disabled="isButtonDisabled">Button</button>
 
         <p v-if="seen">现在你看到我了</p>
-
+        <p v-else>现在你看到他了</p>    
         <a v-bind:href="target.url">{{target.label}}</a>
         <a :href="target.url">.{{target.label}}.</a>
         <a @click="fuck">Fuck off</a>
         <div :class="{ active: isActive, 'text-danger': seen }">动态变化内容</div>
         <div :style="hualala">哗啦啦~~~~</div>
+
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+          </template>
+          <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+          </template>
+          <button @click='switchLoginType'>切换登陆方式</button>
+          <h1 v-show='seen'>test v-show</h1>
     </div>
 
     <script type="text/javascript">
@@ -37,6 +48,7 @@
                 isButtonDisabled: true,
                 isActive: true,
                 seen: true,
+                loginType: 'username',
                 hualala: {
                     color: '#FF0000',
                     fontSize: '20px',
@@ -52,10 +64,14 @@
                     this.msg = 'Fukc off .......'
                     this.reverseMessage
                     this.isActive = !this.isActive
+                    this.seen = !this.seen
                 },
                 getTime: function () {
                     console.log('-->getTime<--')
                     return Date.now();
+                },
+                switchLoginType:function(){
+                    this.loginType = this.loginType == 'username' ? 'email': 'username'
                 }
             }, computed: {
                 reverseMessage: function () {
