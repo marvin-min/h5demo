@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>条件渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+            <ul>
+                    <template v-for="item in 10">
+                      <li>{{ item }}</li>
+                      <li class="divider" role="presentation"></li>
+                    </template>
+                  </ul>
+            <div>
+                    <span v-for="n in 10">{{ n }} </span>
+                  </div>
+        <ul>
+            <li v-for="item,index in items" :key="index">
+                {{index +' --> '+ item.message }}
+            </li>
+
+            <li v-for="item of items">
+                {{item.message }}
+            </li>
+
+        </ul>
+        <ul>
+            <li v-for="n in evenNumbers">{{ n }}</li>
+        </ul>
+        <div v-for="(value, name) in object">
+            {{ name }}: {{ value }}
+        </div>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                object: {
+                    title: 'How to do lists in Vue',
+                    author: 'Jane Doe',
+                    publishedAt: '2016-04-10'
+                },
+                numbers: [1, 2, 3, 4, 5],
+                items: [
+                    { message: 'Foo' },
+                    { message: 'Bar' }
+                ]
+            },
+            computed: {
+                evenNumbers: function () {
+                    return this.numbers.filter(function (number) {
+                        return number % 2 !== 0
+                    })
+                }
+            },
+        })</script>
+</body>
+
+</html>
