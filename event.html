@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="counter += 1">Add +1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+       <button @click="greet"> Greeting.</button>
+       <button @click="sayHi('vue')"> Greeting.</button>
+       <input @keyup.enter="go">
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                counter: 0,
+                msg: ''
+            },
+            methods: {
+                go: function(){alert('go')},
+                sayHi:function(name){
+                    alert("Hi~~" + name)
+                },
+                greet: function(event){
+                    alert("hello" + this.counter);
+                    alert(event.target.name)
+                },
+                submit: function(event){
+                    console.log(event)
+                    console.log(this.msg)
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
