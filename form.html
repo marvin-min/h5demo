@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form</title>
+</head>
+
+<body>
+    https://cn.vuejs.org/v2/guide/forms.html
+    <div id="app">
+        <input v-model.lazy.trim="msg" placeholder="edit me">
+        <p>Message is: {{ msg }}</p>
+
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+        <br/>
+        <input type="checkbox" id="Java" value="Java" v-model="language">
+        <label for="Java">Java</label>
+        <input type="checkbox" id="Node" value="Node" v-model="language">
+        <label for="Node">Node</label>
+        <input type="checkbox" id="Go" value="Go" v-model="language">
+        <label for="Go">Go</label>
+
+        <p>你喜欢的编程语言是:{{language.join(";  ")}}</p>
+
+    <select v-model="selected" multiple>
+        <option disabled value="" >请选择</option>
+        <option selected>A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+    --------><input type="checkbox" v-model="toggle">----->{{toggle}}
+    <p>
+        {{picked}}<input type="radio" v-model="picked" value="a">
+    </p>
+    <p>
+        <input
+  type="checkbox"
+  v-model="toggle"
+  true-value="yes"
+  false-value="no"
+>
+    </p>
+    <p>
+        Number:
+        <input v-model.number="age" type="number">
+    </p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                age: 19,
+                picked:'',
+                toggle:false,
+                msg: '',
+                selected:[],
+                language:['Java'],
+                checked: false
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -16,13 +16,18 @@
        <button @click="greet"> Greeting.</button>
        <button @click="sayHi('vue')"> Greeting.</button>
        <input @keyup.enter="go">
+       <span>Multiline message is:</span>
+<p style="white-space: pre-line;">{{ message }}</p>
+<br>
+<textarea v-model="message" placeholder="add multiple lines"></textarea>
     </div>
     <script type="text/javascript">
         var vm = new Vue({
             el: '#app',
             data: {
                 counter: 0,
-                msg: ''
+                msg: '',
+                message:''    
             },
             methods: {
                 go: function(){alert('go')},
