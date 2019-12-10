@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +11,43 @@
 
 <body>
     <div id="app">
-      
+        <blog-post :post='post' @change_color='changeColor' :style="{color:color}">Something bad happened.</blog-post>
+        <my-btn label="go-->"></my-btn>
+        <my-btn v-for="btn in btns" :key='btn' :label="btn"></my-btn>
     </div>
     <script type="text/javascript">
+
+        Vue.component('blog-post',{
+            props:['post'],
+            template: `
+            <div class='blog-post'>
+                <h1>{{post.title}}</h1>
+                <div v-html='post.content'></div>
+                <button @click="$emit('change_color')">change color</button>
+                <slot></slot>
+            </div>
+            `
+        })
+        Vue.component('my-btn', {
+            props: ['label'],
+            template: '<button>{{label}}</button>'
+        });
         var vm = new Vue({
             el: '#app',
             data: {
-                
+                btns: ['Default', 'Success', 'Warn', 'Error'],
+                color:'#000',
+                post: {
+                    title:"Vue学习教程",
+                    content:'<h2>如何学习VUE</h2><br><h5>多联系</h5>'
+                },
+                postColor:'red',
             },
             methods: {
-                
+                changeColor:function(){
+                    console.log('------>')
+                    this.color='red'
+                }
             },
         });
     </script>
