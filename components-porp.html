@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prop</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+        学习地址：https://cn.vuejs.org/v2/guide/components-props.html
+    <div id="app">
+       <blog-post :title="post.title +'---->' + post.author" :likes="post.likes"></blog-post>
+    </div>
+    <script type="text/javascript">
+        Vue.component('blog-post', {
+            // 在 JavaScript 中是 camelCase 的
+            props: {
+                title:String,
+                likes: Number,
+            },
+            template: '<div><h3>{{ title }}</h3><h4>{{likes}}</h4></div>'
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                post: {
+                    title:'-->post title<---',
+                    content: 'post conetnt',
+                    author: 'no one',
+                    likes:42,
+                }
+            },
+            methods: {
+
+            },
+        });
+    </script>
+</body>
+
+</html>
