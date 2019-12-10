@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>深入了解组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+        https://cn.vuejs.org/v2/guide/components-registration.html
+    <div id="app">
+      <ca></ca>
+      <cb></cb>
+    </div>
+    <script type="text/javascript">
+    var ca = {
+        template:`
+            <h1>this is h1</h1>
+        `
+    }
+    var cb = {
+        components:{
+                'ca':ca,
+        },
+        template:`
+            <div>
+            <ca name='ca'></ca>
+            <h2>this i2</h2>
+            </div>
+
+        `
+    }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                
+            },
+            methods: {
+                
+            },
+            components:{
+                'cb':cb,
+            }
+        });
+    </script>
+</body>
+
+</html>
