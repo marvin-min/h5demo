@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prop</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    学习地址：https://cn.vuejs.org/v2/guide/components-props.html
+    <div id="app">
+        <blog-post :post="post" :content_color="contentColor" v-on:change-color="changeColor"></blog-post>
+        <blog-post :post="{title:'aaa',author:'bbb',likes:'15',content:'content'}" content_color='blue'></blog-post>
+    </div>
+    <script type="text/javascript">
+        Vue.component('blog-post', {
+            // 在 JavaScript 中是 camelCase 的
+            props: ['post','content_color'],
+            template: 
+            `<div>
+                <h3>{{ post.title }}</h3>
+                <h4 v-text="post.author"></h4>
+                <h4>{{post.likes}}====>{{content_color}}</h4>
+                <p v-text="post.content" :style="{color:content_color}"></p>
+                <button v-on:click="$emit('change-color')">
+                Change Color
+                </button>
+            </div>`
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                contentColor: 'red',
+                post: {
+                    title: '-->post title<---  ',
+                    content: 'post conetnt',
+                    author: 'no one',
+                    likes: 42,
+                }
+            },
+            methods: {
+                changeColor(){
+                    console.log("aaa")
+                    this.contentColor = '#eaefec'
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

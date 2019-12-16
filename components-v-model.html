@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prop</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    学习地址：https://cn.vuejs.org/v2/guide/components-props.html
+    <div id="app">
+        <div v-text='searchText'></div>
+        <custom-input v-model="searchText"><button>Go</button></custom-input>
+    </div>
+    <script type="text/javascript">
+        Vue.component('custom-input', {
+            props: ['value'],
+            template: `
+            <div>
+                <input
+                v-bind:value="value"
+                v-on:input="$emit('input', $event.target.value)"
+                >
+                <slot></slot>
+                </div>
+            `
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                searchText:'input some things'
+            },
+            methods: {
+
+            },
+        });
+    </script>
+</body>
+
+</html>
