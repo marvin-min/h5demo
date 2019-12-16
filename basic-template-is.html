@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Components</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>You can always copy file and modify it to start a new page.</h1>
+        <table>
+            <tr is="list" v-for="(i, index) in 10" :key="index" :i='i'></tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        Vue.component('list', {
+            props:['i'],
+            template: `<tr><td>{{i}}</td></tr>`
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+
+            },
+        });
+    </script>
+</body>
+
+</html>
