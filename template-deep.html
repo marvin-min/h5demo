@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Components</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+          <my-header></my-header>
+          <my-content></my-content>
+          <my-footer></my-footer>
+    </div>
+    <script type="text/javascript">
+    var Content = {template:`<h1>Body</h1>`}
+    var Footer = {template:`<h1>Footer</h1>`}
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                
+            },
+            methods: {
+                
+            },
+            components: {
+                'my-header':  {template:`<h1>Heder</h1>`},
+                'my-content':Content,
+                'my-footer':Footer
+            }
+        });
+    </script>
+</body>
+
+</html>
