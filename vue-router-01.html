@@ -17,6 +17,7 @@
 
 <body>
     <div id="app">
+        <router-view name='header'></router-view>
         <h1>Router Demo</h1>
         <router-link to="/foo/bar-->">Go to Foo</router-link>
         <router-link to="/bar">Go to Bar</router-link>
@@ -24,28 +25,45 @@
         <router-link to="/a">跳转</router-link>
         <router-link to="/search?q=123">搜索</router-link>
         <router-view></router-view>
+
         <button @click="goAway">滚。。。。。。。。。</button>
         <button @click="search">搜索</button>
         <button @click="go">回去</button>
-        <router-link
-        to="/bar"
-        replace
->
-    <h1>content</h1>
-</router-link>
+        <router-link to="/bar" replace>
+            <h1>content</h1>
+        </router-link>
         <router-link to="/bar" replace>replace without history</router-link>
-        
+        <router-link to="/article/123">Article</router-link>
+
+        <button @click="article">article</button>
+        <router-view name='footer'></router-view>
+        <router-link to="/home" replace>Home</router-link>
+
     </div>
     <script type="text/javascript">
-        const Foo = {props: ['param'], template: '<div>{{param}}</div>' }
+        const Header = { template: "<h1>Header</h1>" }
+        const Footer = { template: "<h3>Footer</h3>" }
+        const Foo = { props: ['param'], template: '<div>{{param}}</div>' }
+        const Article = { props: ['id'], template: '<div>----->{{id}}<-------</div>' }
+
         const Bar = { template: '<div>bar</div>' }
-        const User = {props: ['id'], template: '<h1>User: {{ $route.params.id }}</h1>' }
-        const SearchUser={template: '<h1>搜索参数: {{ $route.query.q }}</h1>'}
-        
+        const User = { props: ['id'], template: '<h1>User: {{ $route.params.id }}</h1>' }
+        const SearchUser = { template: '<h1>搜索参数: {{ $route.query.q }}</h1>' }
+
         const routes = [
-            { path: '/foo/:param', component: Foo, props:true },
+            {
+                path: '/',
+                components: {
+                    default: Bar,
+                    header: Header,
+                    footer: Footer
+                },
+                alias: '/home'
+            },
+            { path: '/foo/:param', component: Foo, props: true },
             { path: '/bar', component: Bar },
-            { path: '/user/:id', component: User  },
+            { path: '/user/:id', component: User },
+            { path: '/article/:id', component: Article, name: 'article', props: true },
             { path: '/a', redirect: '/foo' },
             { path: '/search', component: SearchUser, props: (route) => ({ query: route.query.q }) }
         ]
@@ -59,16 +77,20 @@
 
             },
             methods: {
-                goAway(){
-                    router.push({ path: '/user/123', params: { id: '123' }})
+                goAway() {
+                    router.push({ path: '/user/123' })
                 },
-                search(){
-                    router.push({ path: '/search', query: { q: 'abc' }})
+                search() {
+                    router.push({ path: '/search', query: { q: 'abc' } })
                 },
-                go(){
+                go() {
                     router.go(-1)
+                }, article() {
+                    this.$router.push({ name: 'article', params: { id: '123' } })
                 }
-            }, router
+            }, 
+            mode: 'history',
+            router
         });
     </script>
 </body>
