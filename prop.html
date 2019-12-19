@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +10,36 @@
 </head>
 
 <body>
+    https://cn.vuejs.org/v2/guide/components-custom-events.html
     <div id="app">
+        <child :age='2'></child>
+        <child :age='ui'></child>
+        <child :age='111'></child>
+        <child :age='8'></child>
     </div>
     <script type="text/javascript">
         var vm = new Vue({
             el: '#app',
             data: {
-                
+
             },
             methods: {
-                
+
             },
+            components: {
+                'child': {
+                    props: {
+                        age: {
+                            type: Number,
+                            required: true,
+                            validator: function (val) {
+                                return val > 3 && val < 18
+                            }
+                        }
+                    },
+                    template: `<h3>{{age}}</h3>`
+                }
+            }
         });
     </script>
 </body>
