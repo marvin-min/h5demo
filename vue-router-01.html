@@ -22,17 +22,32 @@
         <router-link to="/bar">Go to Bar</router-link>
         <router-link :to="'/user/'+3">用户3</router-link>
         <router-link to="/a">跳转</router-link>
+        <router-link to="/search?q=123">搜索</router-link>
         <router-view></router-view>
+        <button @click="goAway">滚。。。。。。。。。</button>
+        <button @click="search">搜索</button>
+        <button @click="go">回去</button>
+        <router-link
+        to="/bar"
+        replace
+>
+    <h1>content</h1>
+</router-link>
+        <router-link to="/bar" replace>replace without history</router-link>
+        
     </div>
     <script type="text/javascript">
         const Foo = {props: ['param'], template: '<div>{{param}}</div>' }
         const Bar = { template: '<div>bar</div>' }
         const User = {props: ['id'], template: '<h1>User: {{ $route.params.id }}</h1>' }
+        const SearchUser={template: '<h1>搜索参数: {{ $route.query.q }}</h1>'}
+        
         const routes = [
             { path: '/foo/:param', component: Foo, props:true },
             { path: '/bar', component: Bar },
             { path: '/user/:id', component: User  },
-            { path: '/a', redirect: '/foo' }
+            { path: '/a', redirect: '/foo' },
+            { path: '/search', component: SearchUser, props: (route) => ({ query: route.query.q }) }
         ]
         const router = new VueRouter({
             routes // (缩写) 相当于 routes: routes
@@ -44,7 +59,15 @@
 
             },
             methods: {
-
+                goAway(){
+                    router.push({ path: '/user/123', params: { id: '123' }})
+                },
+                search(){
+                    router.push({ path: '/search', query: { q: 'abc' }})
+                },
+                go(){
+                    router.go(-1)
+                }
             }, router
         });
     </script>
