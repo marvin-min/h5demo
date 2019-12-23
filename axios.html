@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TODOS</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <script type='text/javascript'>
+        axios.interceptors.request.use(function (config) {
+            console.log(config)
+            config.headers.mytoken = 'nihao'
+            return config
+        }, function (err) {
+            console.log(err)
+        })
+
+        axios.interceptors.response.use(function (res) {
+            console.log(res.data)
+            return res.data
+        }, function (err) {
+            console.log(err)
+        })
+
+        axios.get("http://127.0.0.1:5500/vue-router-02.html#/home").then(function (data) {
+            console.log(data)
+        })
+    </script>
+</body>
+
+</html>

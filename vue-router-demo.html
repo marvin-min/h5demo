@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Components</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <style type="text/css">
+        a.router-link-exact-active.router-link-active {
+            color: green;
+        }
+
+        .main-content {
+            min-height: 200px;
+            background-color: greenyellow;
+        }
+
+        .header,
+        .footer {
+            height: 80px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to='/user'>User</router-link>
+        <router-link to='/reg'>Reg</router-link>
+        <router-view/>
+    </div>
+    <script type="text/javascript">
+        const User = {
+            template: '<h1>User</h1>'
+        }
+
+        const Reg = {
+            template: `
+            <div>
+                <h1>Reg</h1>
+                <hr>
+                <router-link to='/reg/tab1'>Tab1</router-link>
+                <router-link to='/reg/tab2'>Tab2</router-link>
+                <router-view/>
+                </div>
+            `
+        }
+
+        const Tab1 = {
+            template: '<h2> Tab1 </h2>'
+        }
+
+        const Tab2 = {
+            template: '<h2> Tab2 </h2>'
+        }
+        var router = new VueRouter({
+            routes: [
+                { path: '/', redirect: '/user' },
+                { path: '/user', component: User, },
+                {
+                    path: '/reg', component: Reg,
+                    children: [
+                        {path: 'tab1', component:Tab1},
+                        {path: 'tab2', component:Tab2},
+                    ]
+                }
+
+            ]
+        })
+        var vm = new Vue({
+            el: '#app',
+            router,
+        });
+    </script>
+</body>
+
+</html>
