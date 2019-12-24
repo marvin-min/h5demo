@@ -44,20 +44,17 @@
             <div>
                 <h1>Reg</h1>
                 <hr>
-                <router-link to='/reg/tab1'>Tab1</router-link>
-                <router-link to='/reg/tab2'>Tab2</router-link>
+                <router-link to='/reg/tab/1'>Tab1</router-link>
+                <router-link to='/reg/tab/2'>Tab2</router-link>
                 <router-view/>
                 </div>
             `
         }
-
-        const Tab1 = {
-            template: '<h2> Tab1 </h2>'
+        const Tab = {
+            props:['id'],
+            template: '<h2> Tab {{id}} </h2>'
         }
-
-        const Tab2 = {
-            template: '<h2> Tab2 </h2>'
-        }
+ 
         var router = new VueRouter({
             routes: [
                 { path: '/', redirect: '/user' },
@@ -65,8 +62,7 @@
                 {
                     path: '/reg', component: Reg,
                     children: [
-                        {path: '/reg/tab1', component:Tab1},
-                        {path: '/reg/tab2', component:Tab2},
+                        {path: 'tab/:id', component:Tab,props:true},
                     ]
                 }
 
