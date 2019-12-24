@@ -9,6 +9,10 @@
     <script src="./vue.js"></script>
     <script src="./vue-router.js"></script>
     <style type="text/css">
+        body {
+            margin: 0;
+        }
+
         a.router-link-exact-active.router-link-active {
             color: green;
         }
@@ -20,22 +24,116 @@
 
         .header,
         .footer {
-            height: 80px;
+            height: 50px;
+            padding: 10px;
             background-color: antiquewhite;
+            text-align: center;
+            font-size: large;
+        }
+
+        .left {
+            width: 300px;
+            background-color: cadetblue;
+            /* margin: 10px; */
+
+        }
+
+        .body,
+        .left,
+        .main {
+            display: inline-flex;
+        }
+        .body{
+            width: 100%;
+        }
+
+        .main {
+            width: 100%;
+            background-color: #eeeeee;
+            min-height: 200px;
+            /* margin: 10px; */
+            padding: 10px;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
-        
+        <router-view></router-view>
     </div>
     <script type="text/javascript">
-        
- 
+        const Users = {
+            template: `
+        <div>
+            <h2>用户管理</h2>
+        </div>
+        `
+        }
+        const Auths = {
+            template: `
+        <div>
+            <h2>权限管理</h2>
+        </div>
+        `
+        }
+        const Products = {
+            template: `
+        <div>
+            <h2>商品管理</h2>
+        </div>
+        `
+        }
+        const Orders = {
+            template: `
+        <div>
+            <h2>订单管理</h2>
+        </div>
+        `
+        }
+        const Settings = {
+            template: `
+        <div>
+            <h2>系统设置</h2>
+        </div>
+        `
+        }
+        const App = {
+            template: `
+            <div>
+                <div class="header">顶部</div>
+                <div class="body">
+                    <div class="left">
+                        <ul>
+                            <li><router-link to='/users'>用户管理</router-link></li>
+                            <li><router-link to='/auths'>权限管理</router-link></li>
+                            <li><router-link to='/products'>商品管理</router-link></li>
+                            <li><router-link to='/orders'>订单管理</router-link></li>
+                            <li><router-link to='/settings'>系统设置</router-link></li>
+                        </ul>
+                    </div>
+                    <div class="main">
+                        <router-view></router-view>
+                    </div>
+                </div>
+                <div class="footer">底部</div>
+            </div>
+            `
+        }
+
         var router = new VueRouter({
             routes: [
-               
+                {
+                    path: '/', 
+                    redirect: '/users',
+                    component: App, 
+                    children: [
+                        { path: '/users', component: Users },
+                        { path: '/auths', component: Auths },
+                        { path: '/products', component: Products },
+                        { path: '/orders', component: Orders },
+                        { path: '/settings', component: Settings },
+                    ]
+                },
             ]
         })
         var vm = new Vue({
