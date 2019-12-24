@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编程式导航</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <style type="text/css">
+        a.router-link-exact-active.router-link-active {
+            color: green;
+        }
+
+        .main-content {
+            min-height: 200px;
+            background-color: greenyellow;
+        }
+
+        .header,
+        .footer {
+            height: 80px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to='/user/1'>User 1 </router-link>
+        <router-link to='/user/2'>User 2</router-link>
+        <router-link :to='{name:"user",params:{id:3}}'>User 3</router-link>
+        <router-link to='/reg'>Reg</router-link>
+        <router-view/>
+    </div>
+    <script type="text/javascript">
+        const User = {
+            template: '<h1>User {{$route.params.id}}</h1>'
+        }
+
+        const Reg = {
+            template: `
+            <div>
+                <h1>Reg</h1>
+                <hr>
+                <router-link to='/reg/tab/1'>Tab1</router-link>
+                <router-link to='/reg/tab/2'>Tab2</router-link>
+                <router-view/>
+                </div>
+            `
+        }
+        const Tab = {
+            props:['id'],
+            template: `
+            <div>
+                <h2> Tab {{id}} </h2>
+                <button @click='goToReg'>go to reg</button>
+            </div>
+            `,
+            methods: {
+                goToReg(){
+                    this.$router.push('/user/1')
+                }
+            }
+
+        }
+ 
+        var router = new VueRouter({
+            routes: [
+                { path: '/', redirect: '/user' },
+                { path: '/user/:id', component: User, name: 'user',},
+                {
+                    path: '/reg', component: Reg,
+                    children: [
+                        {path: 'tab/:id', component:Tab,props:true},
+                    ]
+                }
+
+            ]
+        })
+        var vm = new Vue({
+            el: '#app',
+            router,
+        });
+    </script>
+</body>
+
+</html>
