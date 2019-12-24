@@ -33,7 +33,7 @@
 
         .left {
             width: 300px;
-            background-color: cadetblue;
+            background-color: rgb(200, 214, 214);
             /* margin: 10px; */
 
         }
@@ -43,7 +43,8 @@
         .main {
             display: inline-flex;
         }
-        .body{
+
+        .body {
             width: 100%;
         }
 
@@ -54,18 +55,42 @@
             /* margin: 10px; */
             padding: 10px;
         }
+        table,th,tr,td {
+            border: 1px solid;
+        }
     </style>
 </head>
 
 <body>
+
     <div id="app">
         <router-view></router-view>
     </div>
     <script type="text/javascript">
         const Users = {
+            data() {
+                return {
+                    userList: [
+                        { id: 1, name: '张三', age: 28 },
+                        { id: 2, name: '李四', age: 38 },
+                        { id: 3, name: '王五', age: 18 },
+                        { id: 4, name: '赵六', age: 19 },
+                        { id: 5, name: '孙琦', age: 25 },
+                        { id: 6, name: '钱多多', age: 48 }
+                    ]
+                }
+            },
             template: `
         <div>
             <h2>用户管理</h2>
+            <table>
+        <thead>
+            <tr><th>编号</th><th>姓名</th><th>年龄</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+            <tr v-for="(user, index) in userList" :key="index"><td>{{user.id}}</td><td>{{user.name}}</td><td>{{user.age}}</td><td>编辑 | 删除</td></tr>
+        </tbody>
+    </table>
         </div>
         `
         }
@@ -123,9 +148,9 @@
         var router = new VueRouter({
             routes: [
                 {
-                    path: '/', 
+                    path: '/',
                     redirect: '/users',
-                    component: App, 
+                    component: App,
                     children: [
                         { path: '/users', component: Users },
                         { path: '/auths', component: Auths },
