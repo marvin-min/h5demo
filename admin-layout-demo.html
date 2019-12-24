@@ -80,18 +80,24 @@
                     ]
                 }
             },
+            methods: {
+                goDetail(id){
+                    this.$router.push('/userinfo/'+id)
+                }
+            },
             template: `
-        <div>
-            <h2>用户管理</h2>
-            <table>
-        <thead>
-            <tr><th>编号</th><th>姓名</th><th>年龄</th><th>操作</th></tr>
-        </thead>
-        <tbody>
-            <tr v-for="(user, index) in userList" :key="index"><td>{{user.id}}</td><td>{{user.name}}</td><td>{{user.age}}</td><td>编辑 | 删除</td></tr>
-        </tbody>
-    </table>
-        </div>
+            <div>
+                <h2>用户管理</h2>
+                <table>
+            <thead>
+                <tr><th>编号</th><th>姓名</th><th>年龄</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+                <tr v-for="(user, index) in userList" :key="index"><td>{{user.id}}</td><td>{{user.name}}</td><td>{{user.age}}</td>
+                <td><a   @click="goDetail(user.id)">详情</a></td></tr>
+            </tbody>
+        </table>
+            </div>
         `
         }
         const Auths = {
@@ -121,6 +127,20 @@
             <h2>系统设置</h2>
         </div>
         `
+        }
+        const UserInfo = {
+            props:['id'],
+            template:`
+                <div>
+                    <h3>{{id}}</h3>
+                    <button @click='goback'>后退</button>
+                </div>
+            `,
+            methods: {
+                goback(){
+                    this.$router.go(-1);
+                }
+            }
         }
         const App = {
             template: `
@@ -153,6 +173,7 @@
                     component: App,
                     children: [
                         { path: '/users', component: Users },
+                        { path: '/userinfo/:id', component: UserInfo, props: true},
                         { path: '/auths', component: Auths },
                         { path: '/products', component: Products },
                         { path: '/orders', component: Orders },
