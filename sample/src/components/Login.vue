@@ -4,9 +4,18 @@
       <div class="avatar_box">
         <img src="../assets/logo.jpeg" />
       </div>
-      <el-form ref="loginFormRef" :model="loginForm" class="login_form" :rules="loginRules">
+      <el-form
+        ref="loginFormRef"
+        :model="loginForm"
+        class="login_form"
+        :rules="loginRules"
+      >
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" prefix-icon="el-icon-user" placeholder="输入用户名"></el-input>
+          <el-input
+            v-model="loginForm.username"
+            prefix-icon="el-icon-user"
+            placeholder="输入用户名"
+          ></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
@@ -29,39 +38,39 @@ export default {
   data() {
     return {
       loginForm: {
-        username: "zs1",
-        password: "123445"
+        username: 'zs1',
+        password: '123445'
       },
       loginRules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: "输入密码", trigger: "blur" },
-          { min: 6, max: 20, message: "长度在 5 到 20 个字符", trigger: "blur" }
+          { required: true, message: '输入密码', trigger: 'blur' },
+          { min: 6, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
         ]
       }
-    };
+    }
   },
   methods: {
     resetLoginForm() {
-      this.$refs.loginFormRef.resetFields();
+      this.$refs.loginFormRef.resetFields()
     },
     login() {
       this.$refs.loginFormRef.validate(async valid => {
-        if (!valid) return;
-        console.log("login ....");
-        const result = await this.$http.get("/search");
+        if (!valid) return
+        console.log('login ....')
+        const result = await this.$http.get('/search')
         if (result.status == 200) {
-          this.$msg.success("登陆成功");
-          window.sessionStorage.setItem("totals", result.data.total_results);
-          this.$router.push('/home');
+          this.$msg.success('登陆成功')
+          window.sessionStorage.setItem('totals', result.data.total_results)
+          this.$router.push('/home')
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .login_container {
