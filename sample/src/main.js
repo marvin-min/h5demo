@@ -5,6 +5,7 @@ import './plugins/element.js'
 import './assets/css/global.css'
 import axios from 'axios'
 axios.defaults.baseURL = '/api/'
+axios.defaults.timeout = 6000
 axios.interceptors.request.use(config => {
   config.headers.Authorization =
     'Bearer ' + window.sessionStorage.getItem('accessToken')
