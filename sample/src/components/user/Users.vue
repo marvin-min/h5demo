@@ -17,7 +17,21 @@
           <el-button type="primary">添加用户</el-button>
         </el-col>
       </el-row>
-      <div v-for="(item, index) in userList" :key="index">{{item.email}}</div>
+      <el-table :data="userList" :border="true">
+        <el-table-column prop="username" label="用户名"></el-table-column>
+        <el-table-column prop="email" label="姓名"></el-table-column>
+        <el-table-column prop="mobile" label="电话号码"></el-table-column>
+        <el-table-column label="状态">
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.status"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              @change="changeStatus(scope.row)"
+            ></el-switch>
+          </template>
+        </el-table-column>
+      </el-table>
     </el-card>
   </div>
 </template>
@@ -31,9 +45,10 @@ export default {
       userList: []
     }
   },
-  watch: {},
-  computed: {},
   methods: {
+    changeStatus(row) {
+      console.log(row)
+    },
     async getUserList() {
       const { data: userList } = await this.$http.get('users')
       this.userList = userList
@@ -41,13 +56,15 @@ export default {
   },
   created() {
     this.getUserList()
-  },
-  mounted() {}
+  }
 }
 </script>
 <style lang="scss" scoped>
 .user-list {
   .el-card {
+    margin-top: 20px;
+  }
+  .el-table {
     margin-top: 20px;
   }
 }
