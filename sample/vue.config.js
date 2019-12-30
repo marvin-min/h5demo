@@ -3,13 +3,20 @@ module.exports = {
     open: true,
     port: 8080,
     proxy: {
-      '/api': {
-        target: 'http://a3pi.active.com/v2', //API服务器的地址
+      '/api/auth': {
+        target: 'http://localhost:8888/auth',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+          '^/api/auth': ''
+        }
+      },
+      '/api/v1': {
+        target: 'http://localhost:8888/api/v1/', //API服务器的地址
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api/v1': ''
         }
       }
-    },
+    }
   }
-};
+}

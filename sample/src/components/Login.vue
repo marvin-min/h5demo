@@ -4,18 +4,9 @@
       <div class="avatar_box">
         <img src="../assets/logo.jpeg" />
       </div>
-      <el-form
-        ref="loginFormRef"
-        :model="loginForm"
-        class="login_form"
-        :rules="loginRules"
-      >
+      <el-form ref="loginFormRef" :model="loginForm" class="login_form" :rules="loginRules">
         <el-form-item prop="username">
-          <el-input
-            v-model="loginForm.username"
-            prefix-icon="el-icon-user"
-            placeholder="输入用户名"
-          ></el-input>
+          <el-input v-model="loginForm.username" prefix-icon="el-icon-user" placeholder="输入用户名"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
@@ -38,8 +29,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: 'zs1',
-        password: '123445'
+        username: 'admin',
+        password: '123456'
       },
       loginRules: {
         username: [
@@ -60,11 +51,14 @@ export default {
     login() {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
-        console.log('login ....')
-        const result = await this.$http.get('/search')
-        if (result.status == 200) {
+        const { data: result } = await this.$http.post(
+          '/auth/login',
+          this.loginForm
+        )
+        console.log(result)
+        if (result.access) {
           this.$msg.success('登陆成功')
-          window.sessionStorage.setItem('totals', result.data.total_results)
+          window.sessionStorage.setItem('accessToken', result.access)
           this.$router.push('/home')
         }
       })

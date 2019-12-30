@@ -37,7 +37,7 @@ const router = new VueRouter({
 //挂在路由导航守卫
 router.beforeEach((to, from, next) => {
   if (to.path == '/login') return next()
-  const totals = window.sessionStorage.getItem('totals')
+  const totals = window.sessionStorage.getItem('accessToken')
   if (!totals) return next('/login')
   next()
 })
