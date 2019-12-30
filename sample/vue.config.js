@@ -10,11 +10,11 @@ module.exports = {
           '^/api/auth': ''
         }
       },
-      '/api/v1': {
-        target: 'http://localhost:8888/api/v1/', //API服务器的地址
+      '/api': {
+        target: 'http://localhost:8888/api/v1', //API服务器的地址
         changeOrigin: true,
         pathRewrite: {
-          '^/api/v1': ''
+          '^/api': ''
         }
       }
     }

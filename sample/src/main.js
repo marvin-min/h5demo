@@ -6,7 +6,8 @@ import './assets/css/global.css'
 import axios from 'axios'
 axios.defaults.baseURL = '/api/'
 axios.interceptors.request.use(config => {
-  config.headers.Authorization = window.sessionStorage.getItem('totals')
+  config.headers.Authorization =
+    'Bearer ' + window.sessionStorage.getItem('accessToken')
   return config
 })
 Vue.config.productionTip = false

@@ -17,6 +17,7 @@
           <el-button type="primary">添加用户</el-button>
         </el-col>
       </el-row>
+      <div v-for="(item, index) in userList" :key="index">{{item.email}}</div>
     </el-card>
   </div>
 </template>
@@ -26,12 +27,21 @@ export default {
   components: {},
   props: {},
   data() {
-    return {}
+    return {
+      userList: []
+    }
   },
   watch: {},
   computed: {},
-  methods: {},
-  created() {},
+  methods: {
+    async getUserList() {
+      const { data: userList } = await this.$http.get('users')
+      this.userList = userList
+    }
+  },
+  created() {
+    this.getUserList()
+  },
   mounted() {}
 }
 </script>
