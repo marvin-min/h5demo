@@ -4,6 +4,7 @@ import router from './router'
 import './plugins/element.js'
 import './assets/css/global.css'
 import axios from 'axios'
+import { Message } from 'element-ui'
 axios.defaults.baseURL = '/api/'
 axios.defaults.timeout = 6000
 axios.interceptors.request.use(config => {
@@ -13,11 +14,11 @@ axios.interceptors.request.use(config => {
 })
 axios.interceptors.response.use(
   data => {
-    console.log(data)
     return data
   },
   err => {
     if (err.response.status == 401) {
+      Message.error('会话已过期，请重新登陆！')
       window.sessionStorage.clear()
     }
   }
