@@ -11,6 +11,17 @@ axios.interceptors.request.use(config => {
     'Bearer ' + window.sessionStorage.getItem('accessToken')
   return config
 })
+axios.interceptors.response.use(
+  data => {
+    console.log(data)
+    return data
+  },
+  err => {
+    if (err.response.status == 401) {
+      window.sessionStorage.clear()
+    }
+  }
+)
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 

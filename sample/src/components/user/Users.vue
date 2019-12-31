@@ -18,6 +18,7 @@
         </el-col>
       </el-row>
       <el-table :data="userList" :border="true">
+        <el-table-column type="index" width="50" label="#"></el-table-column>
         <el-table-column prop="username" label="用户名"></el-table-column>
         <el-table-column prop="email" label="姓名"></el-table-column>
         <el-table-column prop="mobile" label="电话号码"></el-table-column>
@@ -31,7 +32,47 @@
             ></el-switch>
           </template>
         </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-tooltip class="item" content="修改" placement="top" :enterable="false">
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                circle
+                @click="edit(scope.row.id)"
+                size="mini"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip class="item" content="分配角色" placement="top" :enterable="false">
+              <el-button
+                type="warning"
+                icon="el-icon-setting"
+                circle
+                size="mini"
+                @click="assignRoles(scope.row.id)"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip class="item" content="删除用户" placement="top" :enterable="false">
+              <el-button
+                type="danger"
+                icon="el-icon-delete"
+                circle
+                size="mini"
+                @click="deleteUser(scope.row.id)"
+              ></el-button>
+            </el-tooltip>
+          </template>
+        </el-table-column>
       </el-table>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="queryInfo.pageNum"
+        :page-sizes="[10, 20, 30, 50]"
+        :page-size="queryInfo.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="totals"
+      ></el-pagination>
     </el-card>
   </div>
 </template>
@@ -42,16 +83,30 @@ export default {
   props: {},
   data() {
     return {
-      userList: []
+      userList: [],
+      queryInfo: { query: '', pageNum: 10, pageSize: 10 },
+      totals: 0
     }
   },
   methods: {
     changeStatus(row) {
       console.log(row)
     },
+    handleSizeChange(size) {
+      this.queryInfo.pageSize = size
+      this.getUserList()
+    },
+    handleCurrentChange(current) {
+      this.queryInfo.pageNum = current
+      this.getUserList()
+    },
     async getUserList() {
-      const { data: userList } = await this.$http.get('users')
-      this.userList = userList
+      const { data: res } = await this.$http.get('users', {
+        params: this.queryInfo
+      })
+      this.userList = res.results
+      this.queryInfo.pageNum = res.pagination.current_page
+      this.totals = res.pagination.totals
     }
   },
   created() {
