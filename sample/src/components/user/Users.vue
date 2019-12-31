@@ -28,7 +28,7 @@
               v-model="scope.row.status"
               active-color="#13ce66"
               inactive-color="#ff4949"
-              @change="changeStatus(scope.row)"
+              @change="updateStatus(scope.row)"
             ></el-switch>
           </template>
         </el-table-column>
@@ -89,8 +89,19 @@ export default {
     }
   },
   methods: {
-    changeStatus(row) {
-      console.log(row)
+    async updateStatus(row) {
+      try {
+        const resp = await this.$http.put('users/' + row.id, {
+          status: row.status
+        })
+        if (resp && resp.data && resp.data.code == 200) {
+          this.$msg.success(resp.data.msg)
+        } else {
+          this.$msg.error(resp.data.msg)
+        }
+      } catch (error) {
+        console.log(error)
+      }
     },
     handleSizeChange(size) {
       this.queryInfo.pageSize = size
